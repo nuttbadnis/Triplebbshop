@@ -1,0 +1,124 @@
+
+#fixbar_status {
+  display: none;
+  top: 50px;
+  position: fixed;
+  z-index: 1010;
+  right: 0;
+  left: 0;
+  padding: 5px 15px;
+  background-color: #9a0000;
+  border-radius: 0;
+  box-shadow: #c5c5c5 0px 2px 4px -1px;
+  font-family: 'Mitr', sans-serif;
+  font-size: 13px;
+  color: #fff;
+}
+
+.panel {
+    box-shadow: #d2d2d2  2px 2px 5px;
+}
+
+.panel-bar {
+    border-color: #9a0000;
+}
+
+.panel-bar > .panel-heading {
+  color: #ffffff;
+  background-color: #9a0000;
+}
+
+.panel-fonting {
+    font-family: 'Mitr', sans-serif;
+}
+
+.panel-default > .panel-heading {
+    color: #004181;
+    padding-bottom: 0;
+    min-height: 115px;
+}
+
+.panel-heading-bar > .row {
+    line-height: 20px;
+}
+
+.panel-heading-bar > .row > .col-left {
+    text-align: left;
+}
+
+.panel-heading-bar > .row > .col-right {
+    text-align: right;
+}
+
+.panel-editor {
+  padding: 9px;
+  margin: 6px;
+  border: 1px solid #bcddf1;
+  background-color: #dcefff;
+  border-radius: 2px;
+  color: #444;
+}
+
+.panel-last-item {
+  padding: 9px;
+  margin: 6px;
+  border: 1px solid #ffd437;
+  background-color: #fff1ca;
+  border-radius: 2px;
+  color: #444;
+}
+
+.panel-default > .panel-heading .badge {
+    background-color: #7d7d7d;
+}
+
+.panel-default > .panel-heading .btn-warning .badge {
+  color: #f0ad4e;
+  background-color: #fff;
+}
+
+.img-shop {
+  text-align: center;
+  line-height: 5px;
+}
+
+.max-w282 {
+  max-width: 282px;
+}
+
+.max-w94 {
+  max-width: 94px;
+}
+
+.upfile-800x600 {
+  margin-top: 5px;
+}
+
+.w-55 {
+  width: 55px;
+}
+
+.txt-blue {
+  color: #004181;
+}
+
+.txt-green {
+  color: #009006;
+}
+
+.txt-orange {
+    color: #f7941d;
+}
+
+.left-label {
+  text-align: left !important;
+}
+
+.right-label {
+  text-align: right !important;
+}
+
+.tab-space {
+  padding-left: 30px;
+  padding-right: 10px;
+}

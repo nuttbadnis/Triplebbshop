@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+	<title>3BB Shop Back Office</title>
+
+	<link rel="shortcut icon" href="App_Inc/3bfav.ico" type="image/x-icon">
+	<link rel="icon" href="App_Inc/3bfav.ico" type="image/x-icon">
+	<!-- 
+	<script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyDgY6nV9QxM4BF-4yNyXh4AjywZFzNe8v4" type="text/javascript"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgY6nV9QxM4BF-4yNyXh4AjywZFzNe8v4" type="text/javascript"></script>
+
+	-->
+  	<script src="https://maps.google.com/maps/api/js?key=AIzaSyCyyKlfSYYOjD6F36Nmf3F_q68kmrBfhtA&sensor=false" type="text/javascript"></script> 
+
+	<link type="text/css" rel="stylesheet" href="App_Inc/reset.css" />
+	<script src="App_Inc/jquery-1.11.3.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="App_Inc/jquery-ui-1.11.4/jquery-ui.css"/>
+	<script type="text/javascript" src="App_Inc/jquery-ui-1.11.4/jquery-ui.js"></script>
+
+	<link rel="stylesheet" href="App_Inc/bootstrap/css/bootstrap.css" />
+	<script src="App_Inc/bootstrap/js/bootstrap.js"></script>
+
+	<link type="text/css" rel="stylesheet" href="App_Inc/stockShop.css" />
+	<link type="text/css" rel="stylesheet" href="App_Inc/mapReport.css" />
+	<link type="text/css" rel="stylesheet" href="App_Inc/gly-spin.css" />
+
+	<script src="App_Inc/panu.js?vs=12"></script>
+	<script src="App_Inc/var.js?vs=12"></script>
+
+	<style type="text/css">
+	body {
+		overflow-y: hidden;
+	}
+	.box-popup {
+		width: auto;
+		min-width: 155px;
+		padding: 5px;
+		font-size: 12px;
+		line-height: 20px;
+	}
+	#desc_popup {
+		top: 0px;
+		left: 0px;
+	}
+	#color_popup {
+		bottom: 0px;
+		left: 0px;
+	}
+	#color_popup img {
+		width: 20px;
+		height: 20px;
+	}
+	#page_loading .in-loading {
+		margin: 70px auto;
+	}
+	#fullsize_popup {
+		font-weight: bold;
+		right: 0px;
+		bottom: 0px;
+	}
+	#fullsize_popup:hover {
+		color: #0079F9;
+		cursor: pointer;
+	}
+	</style>
+<body>
+
+<div id="map"></div>
+
+<div id="color_popup" class="box-popup"></div>
+
+<div id="fullsize_popup" class="box-popup">
+	>> คลิกเพื่อดูแผนที่ขนาดใหญ่ <<
+</div>
+
+<div id="desc_popup" class="box-popup" style="display:none;">
+	<b>สำนักงานใหญ่ (BKK01)</b><br>
+	Status: open<br>
+	Shop Open: 10:00<br>
+	Shop Close: 21:00<br>
+	Open Time: 09:56<br>
+	Close Time: -
+</div>
+
+<div id="page_loading" class="modal-backdrop" style="display:none;">
+	<div class="in-loading">
+		<span class="glyphicon glyphicon-refresh gly-spin"></span><span id="txt_loading"> กรุณารอสักครู่...</span>
+	</div>
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+var map_url = reportURL();
+
+$(document).ready(function() { 
+	if(navigator.userAgent.indexOf('MSIE')>0){  
+		$('#txt_loading').html(" คุณกำลังใช้โปรแกรมที่ไม่สนับสนุน กรุณาใช้ Chrome หรือ Firefox");
+		$('#page_loading').fadeIn();
+	}  
+	else {
+		$('#page_loading').fadeIn();
+
+		startMap();
+	}
+
+	var color_html = "" + 
+					// "<b>สถานะเปิด/ปิด สำนักงาน</b><br>" +
+					"<img src='App_Inc/map/logo0.png'> " + arrSts[0] + "<br>" +
+					"<img src='App_Inc/map/logo1.png'> " + arrSts[1] + "<br>" +
+					"<img src='App_Inc/map/logo2.png'> " + arrSts[2] + "<br>" +
+					"<img src='App_Inc/map/logo3.png'> " + arrSts[3] + "<br>" +
+					"<img src='App_Inc/map/logo4.png'> " + arrSts[4] + "<br>" +
+					"<img src='App_Inc/map/logo5.png'> " + arrSts[5] + "<br>";
+
+	$('#color_popup').html(color_html);
+
+});
+
+$('#fullsize_popup').click(function() {
+	// popupCenter(map_url, 'myPop1', 1000, 620);
+	window.open(map_url, '_blank');
+});
+
+function startMap(){
+	if(_GET('lat') != null || _GET('lng') != null) {
+		$('#fullsize_popup').hide();
+
+		var lat = _GET('lat');
+		var lng = _GET('lng');
+		getGoogleMap(lat,lng,true);
+	}
+	else{
+		getShop();
+	}
+}
+
+function getShop() {
+	var url = "reportJson.aspx?qrs=getShopPermiss&uemail=" + _GET('uemail');
+	var lat = 13.905502;
+	var lng = 100.519812;
+
+	console.log(url);
+	$.ajax({
+		url: url,
+		dataType: "json",
+		timeout: 180000,
+		success: function( data ) { 
+
+      	if(data.length > 0){
+      		lat = parseFloat(data[0].latitude);
+      		lng = parseFloat(data[0].longitude);
+
+      		getGoogleMap(lat,lng,true);
+      	}
+      	else {
+      		getGoogleMap(lat,lng);
+      	}
+
+      	map_url = reportURL() + "?lat=" + lat + "&lng=" + lng;
+      },
+      error: function(x, t, m) {
+      	console.log('x>' + x + ' t>' + t + ' m>' + m);
+      	getGoogleMap(lat,lng);
+      }
+  });
+}
+
+function reportURL() {
+	// var url = window.location.protocol + "//" + window.location.host + window.location.pathname;
+	var url = "http://10.11.5.104" + window.location.pathname;
+
+	console.log("url = " + url);
+	url = url.replace("posmap.html", "report.aspx");
+    return url;
+}
+
+$('#sel_ro').change(function() {
+	loadReport();
+});
+
+$('#nav_map').click(function() {
+	$('#map').fadeIn();
+});
+
+$('#nav_table').click(function() {
+	$('#map').fadeOut();
+});
+
+$(document).mouseup(function (e){
+    var container = $("#desc_popup");
+
+    if (!container.is(e.target) && container.has(e.target).length === 0){
+        container.fadeOut();
+    }
+});
+
+$( document ).ajaxStart(function() {
+	$('#page_loading').fadeIn();
+});
+
+$( document ).ajaxStop(function() {
+	$('#page_loading').fadeOut();
+});
+
+</script>
+<script type="text/javascript">
+
+var currentMarker = null;
+
+function getGoogleMap(lat,lng,setDefult = false){
+
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 13,
+		minZoom: 8,
+    	center: new google.maps.LatLng(lat, lng),
+		streetViewControl: false,
+		zoomControl: true,
+		zoomControlOptions: {
+			position: google.maps.ControlPosition.RIGHT_CENTER
+		},
+		mapTypeControl: false
+	});
+
+	var infowindow = new google.maps.InfoWindow();
+	var marker, i;
+	// var url = "reportJson.aspx?qrs=mapResult";
+	var url = "reportJson.aspx?qrs=reportResult";
+
+
+	console.log(url);
+	$.ajax({
+		url: url,
+		dataType: "json",
+		timeout: 180000,
+		success: function( data ) { 
+
+      	if(data.length > 0){
+      		$.each(data,function( i,item ) {
+
+      			var title_shop = "[" + item.shop_code + "] " + item.shop_name;
+      			var mud = "App_Inc/map/logo" + item.shop_status + ".png";
+      			var sts = "<span class='sts-" + item.shop_status + "'>" + arrSts[item.shop_status] + "</span>";
+
+      			if(item.shop_dayoff == 1){
+      				mud = "App_Inc/map/logo1.png";
+      				sts = "<span class='sts-off'>" + strOff + "</span>";
+      			}
+
+      			if(item.latitude != "" && item.longitude != "" ){
+
+      				if (item.shop_temp == 0) {
+      					if(setDefult == true && item.latitude == lat && item.longitude == lng) {
+      						marker = new google.maps.Marker({
+      							position: new google.maps.LatLng(item.latitude, item.longitude),
+      							map: map,
+      							icon: mud,
+      							title: title_shop,
+      							animation: google.maps.Animation.BOUNCE
+      						});
+
+      						currentMarker = marker;
+      					}
+      					else {
+      						marker = new google.maps.Marker({
+      							position: new google.maps.LatLng(item.latitude, item.longitude),
+      							map: map,
+      							icon: mud,
+      							title: title_shop
+      						});
+      					}
+      				}
+      				else if(item.shop_temp != 0) {
+      					title_shop = "[Shop ไม่รับชำระ] " + item.shop_name;
+      					mud = "App_Inc/map/logo55.png";
+
+      					if(setDefult == true && item.latitude == lat && item.longitude == lng) {
+      						marker = new google.maps.Marker({
+      							position: new google.maps.LatLng(item.latitude, item.longitude),
+      							map: map,
+      							icon: mud,
+      							title: title_shop,
+      							animation: google.maps.Animation.BOUNCE
+      						});
+
+      						currentMarker = marker;
+      					}
+      					else {
+      						marker = new google.maps.Marker({
+      							position: new google.maps.LatLng(item.latitude, item.longitude),
+      							map: map,
+      							icon: mud,
+      							title: title_shop
+      						});
+      					}
+      				}
+
+      				google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      					return function() {
+      						var txt_content = "<b>" + title_shop + "</b><br>";
+      						infowindow.setContent(txt_content);
+      						infowindow.open(map, marker);
+
+      						map.setCenter(marker.getPosition());
+
+      						$('#desc_popup').hide();
+
+      						if(item.shop_temp == 0) {
+      							txt_content = "<b>RO" + item.ro + " ";
+      							txt_content += "[" + item.shop_code + "]</b><br>";
+      							txt_content += "<a target='_blank' title='คลิกเพื่อดูข้อมูลสำนักงาน' href='default.aspx?shop_code=" + item.shop_code + "'><b>" + item.shop_name + "</b></a><br>";
+      							txt_content += "สถานะ: <b>" + sts + "</b><br>";
+      							txt_content += "เวลาเปิด: " + item.shop_open + "<br>";
+      							txt_content += "เวลาปิด: " + item.shop_close + "<br>";
+      							txt_content += "บันทึกเปิดเมื่อ: " + item.open_time + "<br>";
+      							txt_content += "บันทึกปิดเมื่อ: " + item.close_time + "<br>";
+      							$('#desc_popup').html(txt_content);
+      							$('#desc_popup').fadeIn();
+      							$('#color_popup').fadeIn();
+      						}
+
+      						map_url = reportURL() + "?lat=" + item.latitude + "&lng=" + item.longitude;
+
+      						if(currentMarker) 
+      							currentMarker.setAnimation(null);
+
+      						currentMarker = marker;
+      						marker.setAnimation(google.maps.Animation.BOUNCE);
+      					}
+      				})(marker, i));
+      			}
+      		});
+      	}
+      },
+      error: function(x, t, m) {
+      	console.log('x>' + x + ' t>' + t + ' m>' + m);
+      }
+  });
+}
+</script>

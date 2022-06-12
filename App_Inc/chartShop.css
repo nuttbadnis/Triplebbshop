@@ -1,0 +1,33 @@
+
+.container-a {
+  margin-top: 30px;
+}
+
+footer {
+  font-size: 12px;
+  color: #444;
+}
+
+.txt-bold {
+  /*font-weight: bold;*/
+  font-weight: 600;
+}
+
+.morris-hover {
+  /*font-weight: bold;*/
+  font-weight: 600;
+}
+
+.head-title {
+  text-align: center;
+  font-size: 22px;
+}
+
+.txt-red {
+  color: #BD0000;
+}
+
+.txt-center {
+  text-align: center
+}
+

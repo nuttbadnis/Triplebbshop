@@ -1,0 +1,1 @@
+<%@ Page Language="VB" AutoEventWireup="false" CodeFile="app_xport_acc_type_team.aspx.vb" Inherits="app_xport_acc_type_team" %>

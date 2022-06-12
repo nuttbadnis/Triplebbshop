@@ -1,0 +1,244 @@
+body {
+  overflow-y: scroll;
+  background-color: #5d5d5d;
+}
+
+.navbar {
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-default {
+    background-color: #fdfdfd;
+}
+
+.box-container {
+  background-color: #343436;
+  border: solid 5px #5d5d5d;
+  border-radius: 9px;
+  padding: 10px;
+  min-height: 400px;
+  position: relative;
+  color: #fff; 
+}
+
+footer {
+  color: #ddd;
+}
+
+.load_center {
+  color: #e6e6e6;
+}
+
+.btn-radtype {
+  color: #fff;
+  background-color: #343436;
+  border-color: #ccc;
+}
+.btn-radtype:focus,
+.btn-radtype.focus {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #8c8c8c;
+}
+.btn-radtype:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.btn-radtype:active,
+.btn-radtype.active,
+.open > .dropdown-toggle.btn-radtype {
+  color: #fff;
+  background-color: #FD8C16;
+  border-color: #fb8000;
+}
+.btn-radtype:active:hover,
+.btn-radtype.active:hover,
+.open > .dropdown-toggle.btn-radtype:hover,
+.btn-radtype:active:focus,
+.btn-radtype.active:focus,
+.open > .dropdown-toggle.btn-radtype:focus,
+.btn-radtype:active.focus,
+.btn-radtype.active.focus,
+.open > .dropdown-toggle.btn-radtype.focus {
+  color: #fff;
+  background-color: #ff9628;
+  border-color: #FD8C16;
+}
+.btn-radtype:active,
+.btn-radtype.active,
+.open > .dropdown-toggle.btn-radtype {
+  background-image: none;
+}
+.btn-radtype.disabled:hover,
+.btn-radtype[disabled]:hover,
+fieldset[disabled] .btn-radtype:hover,
+.btn-radtype.disabled:focus,
+.btn-radtype[disabled]:focus,
+fieldset[disabled] .btn-radtype:focus,
+.btn-radtype.disabled.focus,
+.btn-radtype[disabled].focus,
+fieldset[disabled] .btn-radtype.focus {
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.pop-detail {
+  min-width: 155px;
+  background-color: #fff;
+  color: #555;
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+  padding: 5px 5px;
+  border-radius: 2px;
+  border: solid 1px #fc8b16;
+  opacity: 0.9;
+  display: none;
+}
+
+thead {
+  background-color: #2a2a2a;
+}
+tfoot.dilld {
+  cursor: pointer;
+  color: #9E9E9E;
+  background-color: #2a2a2a;
+}
+
+tfoot.dilld tr:hover {
+  color: #fff;
+}
+
+tbody tr:hover {
+  background-color: #2a2a2a;
+}
+
+.pfoot {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.pfoot .glyphicon {
+  font-size: 14px;
+}
+
+.table-report {
+  margin-top: 7px;
+}
+
+.btn-x-tr {
+  font-size: 10px;
+  padding: 3px 6px;
+  float: right;
+}
+
+.btn-dl {
+  position: absolute;
+  padding: 3px 6px;
+  z-index: 1;
+}
+
+.tr-target-daily-cluster
+, .tr-target-perteam-cluster
+, .tr-target-appused-cluster 
+, .tr-target-newcust-cluster 
+, .tr-a40-t10-cluster 
+{
+  cursor: pointer;
+}
+
+.tr-target-daily-cluster .glyphicon
+, .tr-target-perteam-cluster .glyphicon
+, .tr-target-appused-cluster .glyphicon 
+, .tr-target-newcust-cluster .glyphicon 
+, .tr-a40-t10-cluster .glyphicon 
+{
+  font-size: 11px;
+}
+
+.tr-target-daily-cluster .glyphicon {
+  color: #008000;
+}
+
+.tr-target-perteam-cluster .glyphicon {
+  color: #3ea6ff;
+}
+
+.tr-target-appused-cluster .glyphicon {
+  color: #12e55c;
+}
+
+.tr-target-newcust-cluster .glyphicon {
+  color: #85ddff;
+}
+
+.tr-a40-t10-cluster .glyphicon {
+  color: #3ea6ff;
+}
+
+.tr-target-daily-prov
+, .tr-target-perteam-prov
+, .tr-target-appused-prov 
+, .tr-target-newcust-prov 
+, .tr-a40-t10-prov 
+{
+  color: #dedede;
+}
+
+.tr-target-daily-prov {
+  background-color: #edffef !important;
+}
+
+.tr-target-perteam-prov {
+  background-color: #2a343e  !important;
+}
+
+.tr-target-appused-prov {
+  background-color: #222c2d  !important;
+}
+
+.tr-target-newcust-prov {
+  background-color: #2a343e  !important;
+}
+
+.tr-a40-t10-prov {
+  background-color: #2a343e  !important;
+}
+
+.tr-target-daily-cluster .gclose
+, .tr-target-perteam-cluster .gclose
+, .tr-target-appused-cluster .gclose 
+, .tr-target-newcust-cluster .gclose {
+  color: #ff5757;
+}
+
+.title-target {
+  text-align: center;
+}
+
+.a-sort {
+  cursor: pointer;
+  float: right;
+  color: #ffe783;
+}
+
+.a-sort:hover {
+  color: #cc7100;
+}
+
+.active-sort {
+  color: #ff8d00;
+}
+
+/* css develop version */
+/*.navbar-default {
+  background-color: #ffe500;
+}
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
+  color: rgb(241, 87, 35) !important;
+}
+.navbar-default .navbar-nav > .active > a {
+    background-color: #fffbda;
+}*/
+/* css develop version */

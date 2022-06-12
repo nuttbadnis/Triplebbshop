@@ -1,0 +1,30 @@
+
+li.full-bar {
+  display: block;
+}
+
+li.mini-bar {
+  display: none;
+}
+
+@media (max-width: 1325px) {
+  li.full-bar {
+    display: none;
+  }
+
+  li.mini-bar {
+    display: block;
+  }
+}
+
+body {
+  background-color: #eee;
+}
+
+body .container-table {
+  min-height: 450px;
+  background-color: #fff;
+  border-radius: 3px;
+  font-size: 12px;
+  position: relative;
+}

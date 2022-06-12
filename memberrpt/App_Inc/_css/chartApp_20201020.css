@@ -1,0 +1,266 @@
+
+body {
+  overflow-y: scroll;
+  background-color: #cdcdcd;
+}
+
+body .container {
+  min-height: auto;
+}
+
+.box-container {
+  background-color: #fff;
+  border: solid 5px #cdcdcd;
+  border-radius: 9px;
+  padding: 10px;
+  min-height: 400px;
+  position: relative;
+}
+
+.load_center {
+  text-align: center;
+  margin: auto;
+  width: 90%;
+  margin-top: 150px;
+  font-size: 28px;
+  color: #0167cd;
+}
+
+.canvasjs-chart-canvas {
+  font-family: 'Kanit', sans-serif !important;
+}
+
+.head-desc {
+  text-align: center;
+  font-size: 12px;
+  color: gray;
+}
+
+.modal-xl {
+  width: 1280px;
+}
+
+.container-description .box-container {
+  min-height: auto;
+}
+
+.btn-abs {
+  display: none;
+  position: absolute;
+  z-index: 899;
+  left: 1px;
+  top: 1px;
+  padding: 2px 5px;
+}
+
+.gif-howto {
+  border: solid 2px #FF9800;
+  border-radius: 3px;
+}
+
+.btn-howto {
+  right: 5px;
+  top: 10px;
+  position: absolute;
+}
+
+.txt-target {
+  color: #ff6100;
+}
+
+.btn-radtype {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-radtype:focus,
+.btn-radtype.focus {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #8c8c8c;
+}
+.btn-radtype:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.btn-radtype:active,
+.btn-radtype.active,
+.open > .dropdown-toggle.btn-radtype {
+  color: #fff;
+  background-color: #005fab;
+  border-color: #005fab;
+}
+.btn-radtype:active:hover,
+.btn-radtype.active:hover,
+.open > .dropdown-toggle.btn-radtype:hover,
+.btn-radtype:active:focus,
+.btn-radtype.active:focus,
+.open > .dropdown-toggle.btn-radtype:focus,
+.btn-radtype:active.focus,
+.btn-radtype.active.focus,
+.open > .dropdown-toggle.btn-radtype.focus {
+  color: #fff;
+  background-color: #006dc3;
+  border-color: #0066b7;
+}
+.btn-radtype:active,
+.btn-radtype.active,
+.open > .dropdown-toggle.btn-radtype {
+  background-image: none;
+}
+.btn-radtype.disabled:hover,
+.btn-radtype[disabled]:hover,
+fieldset[disabled] .btn-radtype:hover,
+.btn-radtype.disabled:focus,
+.btn-radtype[disabled]:focus,
+fieldset[disabled] .btn-radtype:focus,
+.btn-radtype.disabled.focus,
+.btn-radtype[disabled].focus,
+fieldset[disabled] .btn-radtype.focus {
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+[data-notify="container"] {
+  max-width: 220px;
+}
+
+@media (min-width: 738px) {
+  .container{
+    width: 720px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 800px) {
+  .container{
+    width: 770px;
+  }
+}
+
+@media (min-width: 838px) {
+  .container{
+    width: 820px;
+  }
+}
+
+@media (min-width: 868px) {
+  .container {
+    width: 850px;
+  }
+}
+
+@media (min-width: 900px) {
+  .container{
+    width: 870px;
+  }
+}
+
+@media (min-width: 938px) {
+  .container{
+    width: 920px;
+  }
+}
+
+@media (min-width: 968px) {
+  .container {
+    width: 950px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container{
+    width: 970px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .container{
+    width: 1070px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container{
+    width: 1170px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .container{
+    width: 1270px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container{
+    width: 1370px;
+  }
+}
+
+@media (min-width: 1500px) {
+  .container{
+    width: 1470px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container{
+    width: 1570px;
+  }
+}
+
+@media (min-width: 1700px) {
+  .container{
+    width: 1670px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .container{
+    width: 1770px;
+  }
+}
+
+@media (min-width: 1900px) {
+  .container{
+    width: 1870px;
+  }
+}
+
+li.mini-bar {
+  display: none;
+}
+
+@media (max-width: 1255px) {
+  li.full-bar {
+    display: none;
+  }
+
+  li.mini-bar {
+    display: block;
+  }
+}
+
+.nav > li.inonly > a {
+  color: #222222;
+}
+.nav > li.inok > a {
+  color: #9d9d9d !important;
+}
+.nav > li.inok > a:hover {
+  color: #fff !important;
+}
+
+.navbar-inverse {
+  background-color: #ffe500;
+}
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+  color: rgb(241, 87, 35) !important;
+}

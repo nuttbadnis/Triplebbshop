@@ -1,0 +1,466 @@
+﻿<%@ Master Language="VB" CodeFile="master_report.master.vb" Inherits="master_report" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <!--[if IE ]> <body class="ie"> <![endif]-->
+    <title>รายงานเปิดปิด ณ วันปัจจุบัน [3BB Shop Back Office]</title>
+
+    <link rel="shortcut icon" href="App_Inc/3bfav.ico" type="image/x-icon">
+    <link rel="icon" href="App_Inc/3bfav.ico" type="image/x-icon">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147236441-1"></script>
+    <script type="text/javascript" src="App_Inc/gtag_3bbback.js?id=UA-147236441-1&vs=12"></script>
+
+    <asp:ContentPlaceHolder ID="firstPlace" runat="server"></asp:ContentPlaceHolder>
+
+    <link type="text/css" rel="stylesheet" href="App_Inc/reset.css" />
+    <script src="App_Inc/jquery-1.11.3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="App_Inc/jquery-ui-1.11.4/jquery-ui.css"/>
+    <script type="text/javascript" src="App_Inc/jquery-ui-1.11.4/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="App_Inc/bootstrap/css/bootstrap.css" />
+    <script src="App_Inc/bootstrap/js/bootstrap.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="App_Inc/icomoon/font-icon.css" />
+    <link type="text/css" rel="stylesheet" href="App_Inc/icomoon-camera/font-icon.css" />
+
+    <link type="text/css" rel="stylesheet" href="App_Inc/main.css?vs=1222" />
+    <link type="text/css" rel="stylesheet" href="App_Inc/stockShop.css?vs=12" />
+    <link type="text/css" rel="stylesheet" href="App_Inc/mapReport.css?vs=12" />
+    <link type="text/css" rel="stylesheet" href="App_Inc/gly-spin.css" />
+
+    <link rel="stylesheet" type="text/css" href="App_Inc/DataTables/datatables.css"/>
+    <script type="text/javascript" src="App_Inc/DataTables/datatables.js"></script>
+
+    <script src="App_Inc/panu.js?vs=1222"></script>
+    <script src="App_Inc/var.js?vs=12"></script>
+    <script src="App_Inc/notation.js?vs=12"></script>
+
+    <style type="text/css">
+    .td-notation {
+        font-size: 12px;
+    }
+    .td-notation:hover {
+        cursor: pointer;
+        color: red;
+    }
+    
+    #gotoTop {
+        bottom: 90px;
+    }
+    #reload_popup {
+        width: auto !important;
+    }
+    </style>
+
+    <script type="text/javascript">
+    $( function() {
+        $( ".box-popup" ).draggable({ containment: "body", scroll: false });
+    } );
+    </script>
+
+</head>
+<body>
+    <input runat="server" id="hide_uemail" xd="hide_uemail" type="hidden">
+    <input runat="server" id="hide_upermiss" xd="hide_upermiss" type="hidden">
+    <input runat="server" id="hide_camera_permit" xd="hide_camera_permit" type="hidden">
+    <form id="form1" runat="server"></form>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="default.aspx">3BB SHOP <span class="bn2line">BACK<br>OFFICE</span></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="default.aspx">ข้อมูลสำนักงาน</a></li>
+                    <li class="dropdown active">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">รายงาน/สถิติ <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="report_premium_receive_shop.aspx">รายชื่อ Shop รับของพรีเมี่ยม</a></li>
+                            <li><a href="report_store_closetemp.aspx">รายงานสำนักงานปิดชั่วคราว</a></li>
+                            <li class="active"><a href="report.aspx">รายงานเปิดปิด ณ วันปัจจุบัน</a></li>
+                            <li><a href="history.aspx">ประวัติ เปิดปิดสำนักงาน</a></li>
+                            <li><a href="chart.aspx">สถิติ เปิดปิดสำนักงาน</a></li>
+                            <li><a href="holidays.aspx">รายการวันหยุดนักขัตฤกษ์</a></li>
+                            <li class="divider"></li>
+                            <li><a href="tbbapp/">สถิติ 3BB Member Application</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">รายชื่อตามสิทธิ์ <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="ro_province.aspx">รายชื่อผู้อำนวยการ/ผู้จัดการ</a></li>
+                            <li><a href="user_list.aspx">รายชื่อผู้มีสิทธิ์ แก้ไขข้อมูล 3BB Shop</a></li> 
+                            <li><a href="contract/viewer_list.aspx">รายชื่อผู้มีสิทธิ์ ระบบข้อมูลสัญญา 3BB Shop</a></li> 
+                            <li><a href="checklist/user_active_pos.aspx">รายชื่อผู้มีสิทธิ์ ระบบรายการตรวจสอบ 3BB Shop</a></li> 
+                            <li><a href="empquest/verify_list.aspx">รายชื่อผู้มีสิทธิ์ Verify ข้อมูลโครงการ</a></li> 
+                            <li><a href="tbbapp/daily_mail_to_list.aspx">รายชื่อผู้มีสิทธิ์ MEMBERRPT</a></li> 
+                            <li><a href="issuelog/poi_informant.aspx">รายชื่อผู้มีสิทธิ์ ISSUE LOG</a></li> 
+                        </ul>
+                    </li>
+                    <li id="li_contract" runat="server"><a href="contract/allContract.aspx">ข้อมูลสัญญา</a></li>
+                    <li><a href="checklist/default.aspx">รายการตรวจสอบ</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="use_loged" style="display:none;">
+                        <a href="manual.aspx" style="font-size:13px; font-weight:600;">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="color:#ccc;"></span> คู่มือ
+                        </a>
+                    </li>
+
+                    <li id="li_login" style="display:none;">
+                        <a href="login.aspx" style="font-size:12px; font-weight:600;">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true" style="color:#0088f5;"></span> Log in
+                        </a>
+                    </li>
+
+                    <li class="dropdown use_loged" style="display:none;">
+                        <a href="#" id="user_logon" runat="server" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="admin_approval.aspx" target="_blank">สถานะการอนุมัติ</a></li> 
+                            <li role="separator" class="divider"></li> 
+                            <li><a href="logoutOauth.aspx">ออกจากระบบ</a></li> 
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <asp:ContentPlaceHolder ID="containerPlace" runat="server"></asp:ContentPlaceHolder>
+
+    <div id="reload_popup" class="box-popup" style="display:none;">
+        <span id="at_time"></span><br>
+        <a id="reload_data">
+            <span class="glyphicon glyphicon-refresh"></span> 
+            คลิกเพื่อ Reload ข้อมูล
+        </a>
+    </div>
+
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="pull-left">
+            <p>Copyright &copy; 2016 by <a href="mailto:support_pos@jasmine.com">support_pos@jasmine.com</a></p>
+            <p>เพื่อการใช้งานเต็มประสิทธิภาพ กรุณาใช้เบราว์เซอร์ Chrome หรือ Firefox</p>
+        </div>
+
+        <div class="pull-right">
+            <span id="gotoTop">
+                <a class='btn btn-default' onclick="$('html,body').animate({scrollTop:0},'slow');return false;" title="กลับขึ้นด้านบน">
+                    <i class="glyphicon glyphicon-chevron-up"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+</footer>
+
+<div id="page_loading" class="modal-backdrop">
+    <div class="in-loading not-nm">
+        <span class="glyphicon icon-clock gly-spin"></span><span id="txt_loading"> กรุณารอสักครู่...</span>
+    </div>
+    <div class="in-loading not-ie">
+        <h3><strong>ระบบไม่รองรับการใช้งานด้วยโปรแกรม Internet Explorer กรุณาใช้ Chrome หรือ Firefox</strong></h3>
+    </div>
+</div>
+
+<div id="modal_alert" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">แจ้งเตือน</h4>
+            </div>
+            <div class="modal-body">
+                <p id="txt_alert">ข้อความ</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="modal_notation" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="title_notation"></h4>
+            </div>
+            <div class="modal-body">
+                <span class="txt-bold txt-red">หมายเหตุเฉพาะกรณี แสดงบนเว็บ 3BB</span>
+                <ul class="ul-note" id="ul_note">
+                    <div id="list_note"></div>
+                </ul>
+                <hr>
+                <label>โน๊ตประจำวัน</label>
+                <p class="ul-note" id="ul_notation">ไม่มีโน๊ตเพิ่มเติม</p>
+                <br>
+                <div class="have-notation" style="display:none;">
+                    <label>ประเภท:</label> <span id="ul_notation_type"></span>
+                    <br>
+                    <br>
+                    <label id="ul_open_accident" class="txt-blue" style="display:none;"><span class="glyphicon glyphicon-ok"></span> เปิดระบบช้าเนื่องจากเหตุสุดวิสัย</label>
+                    <label id="ul_close_accident" class="txt-blue" style="display:none;"><span class="glyphicon glyphicon-ok"></span> ปิดระบบก่อน เนื่องจากเหตุสุดวิสัย</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" onclick="updateNotation()" title="เพิ่มหรือแก้ไข โน๊ตประจำวัน"><span class='glyphicon glyphicon-edit'></span> เพิ่มหรือแก้ไข</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+var data_result;
+var startTime,loadTime;
+var report_page = location.pathname.split("/").slice(-1);
+
+$(document).ready(function() { 
+    checkLogin();
+
+    // $("html,body").scrollTop(50);
+
+     $(window).scroll(function(){  
+         if($(document).scrollTop()>100){
+             $("#gotoTop").show();
+         }else{  
+             $("#gotoTop").hide(); 
+         }  
+     });  
+
+    if(navigator.userAgent.indexOf('MSIE')>0){  
+        $('#txt_loading').html(" คุณกำลังใช้โปรแกรมที่ไม่สนับสนุน กรุณาใช้ Chrome หรือ Firefox");
+        $('#page_loading').fadeIn();
+    }  
+    else {
+        $('#page_loading').fadeIn();
+
+        loadArea();
+
+        // $('#page_loading').hide();
+    }
+});
+
+$('#reload_data').click(function() {
+    loadReport();
+});
+
+$('#sel_ro').change(function() {
+    loadReport();
+});
+
+function loadArea() {
+    var $el = $('#sel_ro');
+    $el.empty();
+    $el.append($("<option></option>")
+        .attr("value", "").text("กำลังโหลด"));
+
+    $.getJSON('reportJson.aspx?qrs=loadArea', function(data) {
+        $el.empty();
+        $el.append($("<option></option>")
+            .attr("value", "").text("ALL"));
+
+        $.each(data,function( i,item ) {
+            $el.append($("<option></option>")
+                .attr("value", item.area_code).text(item.area_name));
+        });
+
+        $('#sel_ro').val(firstHashRO());
+        loadReport();
+    });
+}
+
+function loadReport(){
+    startTime = new Date().getTime();
+    $('#reload_popup').fadeOut();
+
+    var url1 = "reportJson.aspx?qrs=reportResult&ro=" + $('#sel_ro').val();
+    var url2 = "reportJson.aspx?qrs=connectPOSResult&ro=" + $('#sel_ro').val();
+
+    url1 += "&camera_permit=" + $('input[xd="hide_camera_permit"]').val();
+
+    console.log("when " + url1 + " " + url2);
+    $.when( 
+        $.ajax({url:url1, cache:false, dataType:"json", timeout:60000, error:function(x, t, m){ajaxError();} }), 
+        $.ajax({url:url2, cache:false, dataType:"json", timeout:60000, error:function(x, t, m){ajaxError();} }) 
+        ).done(function( data1, data2 ) {
+            data_result = data1[0];
+
+            $.each(data_result,function( i1,item1 ) {
+                $.each(data2[0],function( i2,item2 ) {
+
+                    if(item1.shop_code == item2.shop_code && item1.shop_dayoff == 0){
+                        if(checkNotEmpty(item2.first_up))
+                            item1.first_up = item2.first_up;
+
+                        if(checkNotEmpty(item2.last_up))
+                            item1.last_up = item2.last_up;
+
+                        if(checkNotEmpty(item2.diff_minute))
+                            item1.diff_minute = item2.diff_minute;
+                    }
+                });
+            });
+
+            if(report_page == "report_table.aspx"){
+            	loadTable();
+            }
+            else if(report_page == "report_map.aspx"){
+            	getShop();
+            }
+
+            loadTime = (new Date().getTime() - startTime)/1000;
+            $('#at_time').html(loadTime + "sec " + strDate());
+            $('#reload_popup').fadeIn();
+
+            thisUrlHashRO();
+            aHerfHashRO();
+    });
+
+    function strDate() {
+        var date = new Date(serverTime());
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        seconds = seconds < 10 ? '0'+seconds : seconds;
+        var strTime = hours + ':' + minutes + ':' + seconds;
+        return date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + "  " + strTime;
+    }
+   
+}
+
+function checkGetShop(){
+	var gCode = _GET('shop_code');
+
+	if(gCode != null) {
+		if(gCode != "") {
+			return gCode;
+		}
+	}
+
+	return "";
+}
+
+function firstHashRO() {
+    var get_hash = window.location.hash;
+
+    if(get_hash.search("#RO") == 0){
+        get_hash = get_hash.replace("#RO", "");
+        // get_hash = get_hash.substr(0, 2);
+        return get_hash;
+    }
+    else {
+        return "";
+    }
+}
+
+function thisUrlHashRO() {
+    if($('#sel_ro').val().trim() != ""){
+        window.location.hash = "RO" + $('#sel_ro').val();
+    }
+    else {
+        window.location.hash = "";
+    }
+}
+
+function aHerfHashRO() {
+   $('#href_report_table').attr("href", "report_table.aspx" + strHashRO());
+   $('#href_report_map').attr("href", "report_map.aspx" + strHashRO());
+}
+
+function strHashRO() {
+    if($('#sel_ro').val().trim() != ""){
+        return "#RO" + $('#sel_ro').val();
+    }
+    else {
+        return "";
+    }
+}
+
+$('#smart_search').autocomplete({
+    minLength: 3,
+    focus: function(event, ui) {
+        event.preventDefault();
+        $("#smart_search-search").val(ui.item.label);
+    },
+    source: function( request, response ) {
+        $("#loading_icon").show();
+
+        var url = "reportJson.aspx?qrs=autoComplete&term=" + request.term + "&ro=" + $('#sel_ro').val();
+        console.log(url);
+
+        $.ajax({
+            url: url,
+            cache: false,
+            dataType: "json",
+            success: function( data ) {
+                response( $.map( data.autoComplete, function( item ) {
+                    return {
+                        label: item.shop_label,
+                        value: item.shop_code
+                    }
+                }));
+                $("#loading_icon").hide();
+            },
+            error: function() {
+                $("#loading_icon").hide();
+            }
+        });
+    }
+});
+
+$("#smart_search").keydown(function(event){
+    if(event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+    }
+});
+
+$('#smart_search').focusout(function() {
+    $('#smart_search').val("");
+});
+
+function checkLogin() {
+    if($('input[xd="hide_uemail"]').val() == ""){
+        $('#li_login').show();
+    }
+    else{
+        $('.use_loged').show();
+    }
+}
+
+function ajaxError(){
+    modalAlert("ไม่สำเร็จ กรุณาลองอีกครั้ง หรือติดต่อ support_pos@jasmine.com");
+    $('#modal_alert').on('hidden.bs.modal', function (e) {
+        location.reload();
+    })
+}
+
+function modalAlert(e){
+    $('#txt_alert').html(e)
+    $('#modal_alert').modal("show");
+}
+
+$( document ).ajaxStart(function() {
+    $('#page_loading').fadeIn();
+});
+
+$( document ).ajaxStop(function() {
+    $('#page_loading').fadeOut();
+});
+</script>
+
+<asp:ContentPlaceHolder ID="scriptPlace" runat="server"></asp:ContentPlaceHolder>
