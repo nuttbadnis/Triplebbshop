@@ -13,7 +13,7 @@ Partial Class admin_list
         If Session("Uemail") IsNot Nothing Then
 
             hide_uemail.Value() = Session("Uemail")
-            user_logon.InnerHtml = "<span class='glyphicon glyphicon-off user_logon' aria-hidden='true'></span> " + Session("Uemail")
+            user_logon.InnerHtml = "<span class='glyphicon glyphicon-off user_logon' aria-hidden='true' ></span> " + Session("Uemail")
 
             If CP.rCheckPermiss() > 0 Then
                 CP.rCheckPermissPOS()
