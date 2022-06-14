@@ -628,7 +628,7 @@ function load_r10082() {
                 data_R10082_sum_coin_accum.push(parseInt(sum_coin_accum));
 
                 //max_y2 = findMax(max_y2, parseInt(item.R10082_count_in_day));
-                max_y = findMax(max_y, parseInt(item.R10082_count_acc));
+                max_y = findMax(max_y, parseInt(item.R10082_count_acc)+1200);
                 max_y2 = findMax(max_y2, parseInt(item.R10082_sum_coin));
 
                 data_R10082_avg.push( parseFloat(fixDecimal(1, (parseInt(item.R10082_count_in_day) / parseInt(item.R10082_count_acc)) )) );
